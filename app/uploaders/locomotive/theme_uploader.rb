@@ -3,6 +3,10 @@
 module Locomotive
   class ThemeUploader < ::CarrierWave::Uploader::Base
 
+    include ::CarrierWave::MimeTypes
+
+    process :set_content_type
+
     def store_dir
       if Locomotive.config.delayed_job
         self.build_store_dir('sites', model.id.to_s, 'tmp', 'themes')
