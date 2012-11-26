@@ -86,7 +86,7 @@ module Locomotive
 
           icon = @options[:icon] ? '<span></span>' : ''
 
-          title = @options[:liquid_render] ? @options[:liquid_render].render('page' => page) : page.title
+          title = page.title
 
           label = %{#{icon if @options[:icon] != 'after' }#{title}#{icon if @options[:icon] == 'after' }}
 
@@ -100,8 +100,10 @@ module Locomotive
             caret         = %{ <b class="caret"></b>}
           end
 
+          link = @options[:liquid_render] ? @options[:liquid_render].render('page' => page) : %{<a href="#{href}"#{link_options}>#{label}#{caret}</a>}
+
           output  = %{<li id="#{page.slug.to_s.dasherize}-link" class="link#{selected} #{css}">}
-          output << %{<a href="#{href}"#{link_options}>#{label}#{caret}</a>}
+          output << link
           output << render_entry_children(page, depth.succ) if (depth.succ <= @options[:depth].to_i)
           output << %{</li>}
 
