@@ -1,7 +1,6 @@
 require 'locomotive/carrierwave/base'
 require 'locomotive/carrierwave/asset'
 require 'locomotive/carrierwave/patches'
-require 'carrierwave/processing/mime_types'
 
 # register missing mime types
 EXTENSIONS[:eot] = 'application/vnd.ms-fontobject'
